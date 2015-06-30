@@ -17,10 +17,10 @@
 
     <div id="appDiv" ng-controller="WebbitController as webbitCtrl">
 
-      <p  ng-repeat="webbitNode in webbitCtrl.graphData"
+      <div ng-repeat="webbitNode in webbitCtrl.graphData"
       class="webbit-node"
       id="node-{{webbitNode.id}}"
-      ng-style="{ position: 'relative', left: {{110}}, top: {{220}} }">{{webbitNode.text}}</p>
+      ng-style="{ left: {{webbitNode.id * 80 - 20}}, top: {{webbitNode.id * 80 - 20}} }">{{webbitNode.text}}</div>
 
     </div>
 
