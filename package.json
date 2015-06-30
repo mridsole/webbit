@@ -1,0 +1,18 @@
+{
+  "name": "webbit",
+  "version": "0.1.0",
+  "description": "Empty!",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "angular": "^1.4.1",
+    "bootstrap": "^3.3.5",
+    "express": "^4.13.0",
+    "jquery": "^2.1.4",
+    "underscore": "^1.8.3"
+  }
+}

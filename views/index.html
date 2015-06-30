@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html ng-app="webbitClient">
+  <head>
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="index.css" />
+    <script type="text/javascript" src="jquery.min.js"></script>
+    <script type="text/javascript" src="angular.js"></script>
+    <script type="text/javascript" src="index.js"></script>
+    <script type="text/javascript" src="underscore.js"></script>
+  </head>
+
+  <body>
+
+    <div id="headerDiv">
+       <h1 id="webbitTitle">Webbit</h1>
+    </div>
+
+    <div id="appDiv" ng-controller="WebbitController as webbitCtrl">
+
+      <p  ng-repeat="webbitNode in webbitCtrl.graphData"
+      class="webbit-node"
+      id="node-{{webbitNode.id}}"
+      ng-style="{ position: 'relative', left: {{110}}, top: {{220}} }">{{webbitNode.text}}</p>
+
+    </div>
+
+    <div id="footerDiv" > </div>
+
+  </body>
+</html>
