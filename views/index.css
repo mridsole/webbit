@@ -61,7 +61,33 @@ body, html {
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#494949', endColorstr='#000000',GradientType=0 ); /* IE6-9 */
 }
 
+.webbit-edge {
+
+  z-index: 1;
+
+  position: absolute;
+  display: inline;
+
+  border-width: 1px;
+  border-color: white;
+  border-style: solid;
+
+  /* the position of the 'left end' (at 0 rotation) of the edge */
+  left: 0;
+  height: 0;
+
+  height: 0px;
+
+  /* the length of the edge */
+  width: 100px;
+
+  box-shadow: 0px 0px 8px 0px #AAAAAA;
+}
+
 .webbit-node {
+
+  z-index: 2;
+
   position: absolute;
   display:inline;
   border-radius: 10px;
@@ -70,10 +96,20 @@ body, html {
   background-color: #222222;
   opacity: 0.8;
 
+  overflow: hidden;
+
+  max-width: 80px;
+  max-height: 50px;
+
+  text-align: left;
+
   box-shadow: 0px 0px 8px 0px #AAAAAA;
 }
 
 .webbit-node-hover {
+
+  z-index: 3;
+
   position: absolute;
   display:inline;
   border-radius: 10px;
@@ -81,6 +117,12 @@ body, html {
   padding: 10px;
   background-color: #343434;
   opacity: 0.8;
+
+  max-width: 200px;
+
+  text-align: left;
+
+  cursor: pointer;
 
   box-shadow: 0px 0px 14px 0px #AAAAAA;
 }
