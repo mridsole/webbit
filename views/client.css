@@ -7,6 +7,10 @@ body, html {
 }
 
 #headerDiv {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
   position: relative;
   height: 10%;
 
@@ -24,6 +28,10 @@ body, html {
 }
 
 #webbitTitle {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
   position: relative;
   display: inline;
 
@@ -32,6 +40,7 @@ body, html {
 }
 
 #appDiv {
+  user-select: none;
   height: 80%;
   position: relative;
   overflow: hidden;
@@ -49,6 +58,7 @@ body, html {
 
 #footerDiv {
 
+  user-select: none;
   height: 10%;
 
   /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#494949+0,000000+100 */
@@ -64,6 +74,10 @@ body, html {
 
 .webbit-edge {
 
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
   z-index: 1;
 
   position: absolute;
@@ -93,6 +107,10 @@ body, html {
 
 .webbit-node {
 
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
   z-index: 2;
 
   position: absolute;
@@ -115,6 +133,10 @@ body, html {
 
 .webbit-node-hover {
 
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
   z-index: 3;
 
   position: absolute;

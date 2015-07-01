@@ -18,7 +18,10 @@
        <h1 id="webbitTitle">Webbit</h1>
     </div>
 
-    <div id="appDiv" ng-controller="WebbitController as webbitCtrl" ng-mousemove="webbitCtrl.mousemove($event);">
+    <div id="appDiv" ng-controller="WebbitController as webbitCtrl"
+    ng-mousemove="webbitCtrl.mousemove($event);"
+    ng-mousedown="webbitCtrl.mousedown($event);" 
+    ng-mouseup="webbitCtrl.mouseup($event);">
 
       <!-- TODO: Mayb make close button or some shit -->
       <webbit-node-full ng-show="webbitCtrl.fullNode"

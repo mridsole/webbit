@@ -17,7 +17,7 @@
 
   var app = angular.module('webbitClient', [  ]);
 
-  app.controller('WebbitController', function () {
+  app.controller('WebbitController', ['$scope', '$timeout', function ($scope, $timeout) {
 
     this.graphData = graphData;
 
@@ -25,6 +25,10 @@
     var appDiv = $('#appDiv');
     View.init( 0, 0,  appDiv.width(), appDiv.height(), appDiv.width(), appDiv.height() );
     View.g2l_batch(graphData);
+
+    $scope.ctrl = this;
+
+    var appDivPos = appDiv.position();
 
     this.nodeDist = function(node1, node2) {
       return Math.sqrt(Math.pow(node1.lx - node2.lx, 2) + Math.pow(node1.ly - node2.ly, 2));
@@ -53,19 +57,47 @@
       return style;
     };
 
+    // For highlighting nodes - might add more functionality later
     this.mouseover = function(event, node) {
       node.class = 'webbit-node-hover';
     };
-
     this.mouseleave = function(event, node) {
       node.class = 'webbit-node';
     };
 
+    // For recording the mouse position
     this.mousemove = function(event) {
-      View.gx = event.pageX - 800;
-      View.gy = event.pageY - 300;
-      View.g2l_batch(graphData);
+      this.mouseX = event.pageX - appDivPos.left;
+      this.mouseY = event.pageY - appDivPos.top;
     }
+
+    // For panning the view
+    this.mousedown = function(event) {
+      // Only start panning if the target was the actual appDiv
+      if(event.target.id == 'appDiv') {
+        this.mouseX_last = this.mouseX;
+        this.mouseY_last = this.mouseY;
+        this.panning = true;
+        this.pan();
+      }
+    };
+    this.mouseup = function(event) {
+      this.panning = false;
+    };
+    this.pan = function() {
+
+      View.gx -= $scope.ctrl.mouseX - $scope.ctrl.mouseX_last;
+      View.gy -= $scope.ctrl.mouseY - $scope.ctrl.mouseY_last;
+
+      $scope.ctrl.mouseX_last = $scope.ctrl.mouseX;
+      $scope.ctrl.mouseY_last = $scope.ctrl.mouseY;
+
+      View.g2l_batch($scope.ctrl.graphData);
+
+      if($scope.ctrl.panning) {
+        $timeout($scope.ctrl.pan, 15);
+      }
+    };
 
     this.full = function(node) {
 
@@ -73,7 +105,7 @@
 
     }
 
-  });
+  }]);
 
   // DIRECTIVES
 
