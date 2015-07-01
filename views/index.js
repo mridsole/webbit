@@ -25,7 +25,7 @@
     };
 
     this.nodeAng = function(node1, node2) {
-      return Math.atan2(node1.gy - node2.gy, node1.gx - node2.gx);
+      return Math.atan2(node1.gy - node2.gy, node1.gx - node2.gx) + Math.PI;
     };
 
     // return a style object detailing the global coords of the node
@@ -64,7 +64,7 @@
         this.fullNode = node;
       }
     }
-    
+
   });
 
   // element directive for a node
