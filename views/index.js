@@ -56,6 +56,15 @@
     this.mouseleave = function(event, node) {
       node.class = 'webbit-node';
     };
+
+    this.full = function(node) { // Mark node as clicked
+      if ( this.fullNode == node ) {
+        this.fullNode = null;
+      }else{
+        this.fullNode = node;
+      }
+    }
+    
   });
 
   // element directive for a node
@@ -73,5 +82,14 @@
       templateUrl: 'directives/webbit-edge.html'
     };
   });
+
+  // element directive for node panel
+  app.directive('webbitNodeFull', function() {
+    return {
+      restrict: 'E',
+      templateUrl: 'directives/webbit-node-full.html'
+    };
+  });
+
 
 })();

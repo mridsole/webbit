@@ -17,7 +17,14 @@
 
     <div id="appDiv" ng-controller="WebbitController as webbitCtrl">
 
-      <webbit-node ng-repeat="webbitNode in webbitCtrl.graphData"></webbit-node>
+      <webbit-node ng-repeat="webbitNode in webbitCtrl.graphData"
+        ng-click="webbitCtrl.full(webbitNode)">
+      </webbit-node>
+
+      <!-- TODO: Mayb make close button or some shit -->
+      <webbit-node-full ng-show="webbitCtrl.fullNode"
+        ng-click="webbitCtrl.full()">
+      </webbit-node-full>
 
     </div>
 
