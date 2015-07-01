@@ -12,6 +12,7 @@
     "angular": "^1.4.1",
     "bootstrap": "^3.3.5",
     "express": "^4.13.0",
+    "gcloud": "^0.16.0",
     "jquery": "^2.1.4",
     "sass": "^0.5.0",
     "underscore": "^1.8.3"

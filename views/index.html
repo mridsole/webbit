@@ -2,11 +2,14 @@
 <html ng-app="webbitClient">
   <head>
     <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" />
-    <link rel="stylesheet" type="text/css" href="index.css" />
+    <link rel="stylesheet" type="text/css" href="client.css" />
     <script type="text/javascript" src="jquery.min.js"></script>
     <script type="text/javascript" src="angular.js"></script>
-    <script type="text/javascript" src="index.js"></script>
     <script type="text/javascript" src="underscore.js"></script>
+
+    <!-- Clientside application scripts -->
+    <script type="text/javascript" src="viewtransform.js"></script>
+    <script type="text/javascript" src="client.js"></script>
   </head>
 
   <body>
@@ -15,16 +18,17 @@
        <h1 id="webbitTitle">Webbit</h1>
     </div>
 
-    <div id="appDiv" ng-controller="WebbitController as webbitCtrl">
-
-      <webbit-node ng-repeat="webbitNode in webbitCtrl.graphData"
-        ng-click="webbitCtrl.full(webbitNode)">
-      </webbit-node>
+    <div id="appDiv" ng-controller="WebbitController as webbitCtrl" ng-mousemove="webbitCtrl.mousemove($event);">
 
       <!-- TODO: Mayb make close button or some shit -->
       <webbit-node-full ng-show="webbitCtrl.fullNode"
         ng-click="webbitCtrl.full()">
       </webbit-node-full>
+
+      <!-- yer -->
+      <webbit-node ng-repeat="webbitNode in webbitCtrl.graphData"
+        ng-click="webbitCtrl.full(webbitNode)">
+      </webbit-node>
 
     </div>
 
