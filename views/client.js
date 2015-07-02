@@ -1,5 +1,39 @@
 // clientside
 
+function logAllNodes() {
+
+  var callback = function(response, status) {
+
+    response.done( function(data) {
+      for(var i = 0; i < data.length; i++) {
+        console.log(data[i]);
+      }
+    });
+  };
+
+  console.log('nodes: ');
+  $.ajax('api/all', { method: 'GET', complete: callback });
+}
+
+// a function callable from the chrome console, for convenience
+function addNode(text, gx, gy, connect) {
+
+  // the data to be sent to the server
+  req_node = { text: text, gx: gx, gy: gy, connect: connect };
+
+  // the callback function
+  var callback = function(response, status) {
+
+    response.done( function(data) {
+      console.log(data);
+    });
+  };
+
+  console.log('response: ');
+  $.ajax('/api/new', { method: 'POST', contentType: 'application/json', data: JSON.stringify(req_node), complete: callback } );
+
+}
+
 (function() {
 
   // some sample graph data
@@ -99,10 +133,9 @@
       }
     };
 
-    this.full = function(node) {
+    this.full = function($event, node) {
 
       this.fullNode = node;
-
     }
 
   }]);

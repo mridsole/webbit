@@ -20,22 +20,26 @@
 
     <div id="appDiv" ng-controller="WebbitController as webbitCtrl"
     ng-mousemove="webbitCtrl.mousemove($event);"
-    ng-mousedown="webbitCtrl.mousedown($event);" 
+    ng-mousedown="webbitCtrl.mousedown($event);"
     ng-mouseup="webbitCtrl.mouseup($event);">
 
       <!-- TODO: Mayb make close button or some shit -->
       <webbit-node-full ng-show="webbitCtrl.fullNode"
-        ng-click="webbitCtrl.full()">
+        ng-click="webbitCtrl.full($event, null)">
       </webbit-node-full>
 
       <!-- yer -->
-      <webbit-node ng-repeat="webbitNode in webbitCtrl.graphData"
-        ng-click="webbitCtrl.full(webbitNode)">
+      <webbit-node ng-repeat="webbitNode in webbitCtrl.graphData">
       </webbit-node>
+
 
     </div>
 
-    <div id="footerDiv" > </div>
+    <div id="footerDiv" >
+
+      <!-- console div -->
+      <div id="console">yerr</div>
+    </div>
 
   </body>
 </html>

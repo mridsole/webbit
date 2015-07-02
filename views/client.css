@@ -59,6 +59,8 @@ body, html {
 #footerDiv {
 
   user-select: none;
+  position: relative;
+  overflow: hidden;
   height: 10%;
 
   /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#494949+0,000000+100 */
@@ -70,6 +72,15 @@ body, html {
   background: -ms-linear-gradient(top,  #494949 0%,#000000 100%); /* IE10+ */
   background: linear-gradient(to bottom,  #494949 0%,#000000 100%); /* W3C */
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#494949', endColorstr='#000000',GradientType=0 ); /* IE6-9 */
+}
+
+#console {
+
+  width: 105%;
+  height: 100%;
+  display: inline;
+  position: absolute;
+  overflow: auto;
 }
 
 .webbit-edge {

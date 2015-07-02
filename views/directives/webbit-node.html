@@ -3,7 +3,8 @@ id="node-{{webbitNode.id}}"
 ng-style="webbitCtrl.style_nodeCoords(webbitNode);"
 ng-class="webbitNode.class"
 ng-mouseover="webbitCtrl.mouseover($event, webbitNode);"
-ng-mouseleave="webbitCtrl.mouseleave($event, webbitNode);">
+ng-mouseleave="webbitCtrl.mouseleave($event, webbitNode);"
+ng-click="webbitCtrl.full($event, webbitNode)">
 {{webbitNode.text}}
 </div>
 

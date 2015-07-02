@@ -11,7 +11,7 @@ module.exports = {
   },
 
   mongodb: {
-    url: '...',
-    collection: '...'
+    url: 'mongodb://23.236.62.84:27017/mydb',
+    collection: 'nodes'
   }
 };
