@@ -1,0 +1,13 @@
+<div
+id="node-{{webbitNode._id}}"
+ng-controller="NodeController as nodeCtrl"
+ng-style="nodeCtrl.style_nodeCoords();"
+ng-class="nodeCtrl.class"
+ng-mouseover="nodeCtrl.mouseover($event);"
+ng-mouseleave="nodeCtrl.mouseleave($event);"
+ng-click="nodeCtrl.full($event, webbitNode);">
+{{webbitNode.text}}
+</div>
+
+<!-- draw all the edges for this node -->
+<webbit-edge ng-repeat="nodeID in webbitNode.connect"></webbit-edge>

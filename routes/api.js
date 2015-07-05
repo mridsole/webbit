@@ -3,87 +3,76 @@
 // define a REST API for the client to call to obtain node data for drawing
 var express = require('express');
 var path = require('path');
+var nodeManager = require('../nodes/nodeManager');
 
 var router = express.Router();
 
-
-// utility to validate data for a new node submission
-// only basic validation - doesn't check for:
-// - existence of 'connect' node ids
-// - whether position of the node is possible
-// - max number of connect ids
-// - etc.
-function validate_node(nodeJSON) {
-
-  // required fields and their types
-  var requiredFields = { text: typeof(''), gx: typeof(2), gy: typeof(2), connect: typeof([]) }
-
-  // check validity of field types
-  for(var field in nodeJSON) {
-    // if a field in nodeJSON isn't in requiredFields:
-    if(requiredFields[field] == undefined) { return false; }
-    // if a field in JSON is in requiredFields, but is of a different type:
-    if(requiredFields[field] != typeof(nodeJSON[field])) { return false; }
-  }
-
-  // check for existence of required fields
-  for(var field in requiredFields) {
-    if(!nodeJSON.hasOwnProperty(field)) { return false; }
-  }
-
-  // check the validity of the connect field - all entries must be numbers
-  for(var i = 0; i < nodeJSON.connect; i++) {
-    if(typeof(id) != typeof(1)) { return false; }
-  }
-
-  return true;
-
-}
-
 // in app.js, this module is applied '/api', so all URIs are relative to that
 
-// get all nodes in the graph (obviously wont be in final implementation)
-router.get('/all', function(req, res) {
+// get all nodes in the graph (obviously wont be in final implementation - just for debugging)
+router.get('/nodes/all', function (req, res) {
 
-  var uc = req.db.get('usercollection');
+  var nodes = req.db.get('nodes');
 
-  uc.find({}, function(err, docs){
+  nodes.find({}, function(err, docs){
     res.send(docs);
   });
 });
 
+// get all nodes around a point for a certain radius, parameters x and y
+// i.e. /nodes?x=0&y=0&r=100
+// also return a mapping from ID to index
+router.get('/nodes/around', function (req, res) {
+
+  // extract from query
+  var x = Number(req.query.x);
+  var y = Number(req.query.y);
+  var r = Number(req.query.r);
+
+  nodeManager.nodesAround([x, y], r, req.db, function (data) {
+    res.send(data);
+  });
+});
+
 // create a new node
-router.post('/new', function(req, res) {
+router.post('/nodes/new', function (req, res) {
 
   var node_req = req.body;
 
-  // validation:
-  var validState = validate_node(node_req);
+  // simple validation:
+  var validState = nodeManager.utils.validateNode(node_req);
 
   if(!validState) {
-    res.status(500);
-    res.send({ status: 500, message: 'bad request' });
+    res.status(400);
+    res.send({ status: 400, message: 'bad request' });
     return;
   }
 
-  var uc = req.db.get('usercollection');
+  var addCallback = function(response) {
+    res.send(response);
+  };
+
+  // if it passes the simple validation, send it to node.add for the necessary processing
+  nodeManager.add(node_req, req.db, addCallback);
+
+
 
   // TO DO:
   // - more validation (posiition, max nodes, distance, etc)
   // - add author ID
-  uc.insert(node_req, function(err, doc) {
-
-    if(err != null) {
-      res.status(500);
-      res.send({ status: 500, message: err });
-      return;
-    }
-
-    var node_res = node_req;
-
-    res.status(201);
-    res.send({ status:201, message: 'new node created', response: node_res });
-  });
+  // uc.insert(node_req, function(err, doc) {
+  //
+  //   if(err != null) {
+  //     res.status(500);
+  //     res.send({ status: 500, message: err });
+  //     return;
+  //   }
+  //
+  //   var node_res = node_req;
+  //
+  //   res.status(201);
+  //   res.send({ status:201, message: 'new node created', response: node_res });
+  // });
 
 });
 

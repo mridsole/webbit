@@ -7,7 +7,7 @@ var router = express.Router();
 
 // Serve the main page
 router.get('/', function(req, res) {
-  res.sendFile(path.join(__dirname, '../views/index.html'));
+  res.sendFile(path.join(__dirname, '../client/index.html'));
 });
 
 module.exports = router;

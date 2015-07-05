@@ -190,3 +190,29 @@ body, html {
   max-width: 90%;
 
 }
+
+.options-panel {
+
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  z-index: 5;
+
+  position: absolute;
+  display:inline;
+  border-radius: 10px;
+  border: 2px solid white;
+  padding: 10px;
+  background-color: #222222;
+  opacity: 0.9;
+
+  right: 30px;
+  top: 30px;
+  width: 200px;
+  height: 400px;
+
+  overflow: hidden;
+
+  text-align: left;
+}
