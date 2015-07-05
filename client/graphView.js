@@ -1,7 +1,7 @@
 ( function () {
 
   // Module containing functionality for graph panning and transforms
-  var graphView = angular.module('graphView',  []);
+  var graphView = angular.module('graphView',  ['graphState']);
 
   // Controller for a node - requires that node be in the scope on initialisation
   graphView.controller('NodeController', ['$scope', function ($scope) {
@@ -30,11 +30,12 @@
 
   }]);
 
-  graphView.controller('EdgeController', ['$scope', 'ViewTransform', function ($scope, ViewTransform) {
+  graphView.controller('EdgeController', ['$scope', 'ViewTransform', 'graphState',
+  function ($scope, ViewTransform, graphState) {
 
     this.class = "webbit-edge";
     this.nodeOrigin = $scope.webbitNode;
-    this.nodeReplyTo = $scope.graphData[$scope.graphMap[$scope.nodeID]];
+    this.nodeReplyTo = graphState.getNodeByID($scope.nodeID);
 
     this.style_edge = function() {
 
@@ -176,4 +177,37 @@
 
   }]);
 
+  // SERVICE for getting the state of the view, including the current ViewTransform and ViewPan object
+  // this doesn't return a constructor but rather a nice way of sharing the view state across modules
+  graphView.factory('viewState', function () {
+
+    var viewState = {};
+
+    viewState.init = function (viewTransform, viewPan) {
+      this.viewTransform = viewTransform;
+      this.viewPan = viewPan;
+    };
+
+    // get the global position of the MIDDLE of the screen
+    viewState.getLoc = function () {
+      return [
+        this.viewTransform.loc[0] + (this.viewTransform.width / 2),
+        this.viewTransform.loc[1] + (this.viewTransform.height / 2)
+      ];
+    };
+
+    // set the global position of the middle of the screen
+    viewState.setLoc = function (loc) {
+      this.viewTransform.loc[0] = loc[0] - (this.viewTransform.width / 2);
+      this.viewTransform.loc[1] = loc[1] - (this.viewTransform.height / 2);
+    };
+
+    // buffered view radius (ie radius that all partially visible nodes are in)
+    viewState.getViewRadius = function () {
+      return Math.sqrt( Math.pow(0.5*this.viewTransform.width, 2) + Math.pow(0.5*this.viewTransform.height, 2) ) + 100;
+    };
+
+    return viewState;
+
+  })
 }) ();

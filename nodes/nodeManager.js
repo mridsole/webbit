@@ -105,9 +105,10 @@ module.exports = {
       }
 
       // if we haven't returned then all connections are in range - so make a new node
-      nodes.insert( nodeJSON );
-
-      callback( { status: 201, message: 'node created' } );
+      nodes.insert( nodeJSON ).success( function (data) {
+        callback( { status: 201, message: 'node created', data: { node: data } } );
+        });
+        
     };
 
     nodes.find(
