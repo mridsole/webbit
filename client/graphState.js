@@ -16,6 +16,13 @@
       .success(callback);
     }
 
+    graphStateAPI.newNode = function(loc, node, callback) {
+
+      var headers = { 'Content-Type': 'application/json' };
+      var params = { }
+      // $http.post('/api/nodes/new', )
+    }
+
     return graphStateAPI;
 
   }]);
