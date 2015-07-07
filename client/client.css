@@ -92,23 +92,6 @@ body, html {
 
   position: absolute;
   display: inline;
-
-  border-width: 1px;
-  border-color: white;
-  border-style: solid;
-
-  /* the position of the 'left end' (at 0 rotation) of the edge */
-  left: 0;
-  height: 0;
-
-  height: 0px;
-
-  /* the length of the edge */
-  width: 100px;
-
-  clip-path: polygon(0px 0px, 0px 10px, 50px 10px, 50px 0px);
-
-  box-shadow: 0px 0px 8px 0px #AAAAAA;
 }
 
 .webbit-edge-disabled {
@@ -270,7 +253,7 @@ body, html {
   -ms-user-select: none;
   user-select: none;
   z-index: 3;
-  
+
   position: absolute;
   display:inline;
   border-radius: 10px;

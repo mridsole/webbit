@@ -1,9 +1,16 @@
-<svg>
- <line id="node-{{webbitNode._id}}-edgeto-{{nodeID}}"
- ng-controller="EdgeController as edgeCtrl"
+<svg
+id="node-{{webbitNode._id}}-edgeto-{{nodeID}}"
+ng-controller="EdgeController as edgeCtrl"
+ng-class="edgeCtrl.classBinding();"
+ng-style="edgeCtrl.style_edgeBound();"
+class='edge-container'>
+ <line
  ng-class="edgeCtrl.classBinding();"
  style="stroke:rgb(255,255,255);stroke-width:2"
- x1="0" y1="0" x2="200" y2="200"
+ ng-attr-x1="{{0.5*edgeCtrl.width;}}"
+ ng-attr-y1="{{0.5*edgeCtrl.height;}}"
+ ng-attr-x2="{{edgeCtrl.x2();}}"
+ ng-attr-y2="{{edgeCtrl.y2();}}"
  >
  </line>
 </svg>

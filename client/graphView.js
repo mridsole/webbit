@@ -19,8 +19,6 @@
     // whether or not this node has been selected as a reply in nodeAdd mode
     this.selected = false;
 
-    console.log('heyy');
-
     // for binding to the DOM with ng-class
     this.classBinding = function () {
 
@@ -39,12 +37,6 @@
 
     // return a style object detailing the local coords of the node
     this.style_nodeCoords = function () {
-
-      try {
-        this.node.loc_local[0];
-      } catch (err) {
-        console.log(this.node);
-      }
 
       return {
         left: this.node.loc_local[0],
@@ -83,6 +75,8 @@
     this.class = 'webbit-edge';
     this.nodeOrigin = $scope.webbitNode;
     this.nodeReplyTo = graphState.getNodeByID($scope.nodeID);
+    this.width = 0;
+    this.height = 0;
 
     this.classBinding = function () {
 
@@ -94,29 +88,24 @@
       return this.class;
     };
 
-    this.x1 = function() {
-      return this.nodeOrigin.loc_local[0];
-    }
-
-    this.y1 = function() {
-      return this.nodeOrigin.loc_local[1];
-    }
-
-    this.style_edge = function() {
-
-      style = {
-        left: this.nodeOrigin.loc_local[0],
-        top: this.nodeOrigin.loc_local[1],
-        transform: 'translate(-50%, -50%);'
+    this.style_edgeBound = function () {
+      this.width = 2*Math.abs(this.nodeOrigin.loc_local[0] - this.nodeReplyTo.loc_local[0]);
+      this.height = 2*Math.abs(this.nodeOrigin.loc_local[1] - this.nodeReplyTo.loc_local[1]);
+      return {
+        left: this.nodeOrigin.loc_local[0] - 0.5*this.width,
+        top: this.nodeOrigin.loc_local[1] - 0.5*this.height,
+        width: this.width,
+        height: this.height
       };
-
-      style.width = ViewTransform.dist(this.nodeOrigin.loc_local, this.nodeReplyTo.loc_local);
-
-      style.transformOrigin = "0% 0%";
-      style.transform = "rotate(" + ViewTransform.ang(this.nodeOrigin.loc_local, this.nodeReplyTo.loc_local) + "rad)";
-
-      return style;
     };
+
+    this.x2 = function () {
+      return this.nodeReplyTo.loc_local[0] - this.nodeOrigin.loc_local[0] + 0.5*this.width;
+    }
+
+    this.y2 = function () {
+      return this.nodeReplyTo.loc_local[1] - this.nodeOrigin.loc_local[1] + 0.5*this.height;
+    }
 
   }]);
 

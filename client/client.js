@@ -40,9 +40,9 @@
 
     // For panning the view
     this.mousedown = function(event) {
-      if (event.target.id == 'appDiv') {
+      // if (event.target.id == 'appDiv' || event.target.className.baseVal == 'edge-container webbit-edge') {
         viewState.viewPan.startPan();
-      }
+      // }
     };
     this.mouseup = function(event) {
       viewState.viewPan.stopPan();
