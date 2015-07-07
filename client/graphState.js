@@ -5,24 +5,23 @@
 
   // SERVICE for dealing with the curren state of the graph
   // used for accessing nodes by ID, requesting updates, etc
-  graphState.factory('graphState', ['viewState', 'graphStateAPI', function (viewState, graphStateAPI) {
+  // really, this SHOULDN'T depend on viewState
+  // 'updateNodesInView' shouldn't be in here
+  graphState.factory('graphState', ['graphStateAPI', function (graphStateAPI) {
 
     var graphState = {
       nodes: [],
       nodeMap: {}
     };
 
+    // get CURRENTLY LOADED node by ID
     graphState.getNodeByID = function (id) {
       return this.nodes[this.nodeMap[id]];
     };
 
-    // get all the nodes in view and add it to the graphState
-    graphState.updateNodesInView = function (callback) {
+    graphState.updateNodes = function (loc, radius, viewTransform, callback) {
 
-      console.log( 'getting nodes in screen radius ' + String(viewState.getViewRadius()) );
-
-      graphStateAPI.getInRadius(viewState.getLoc(), viewState.getViewRadius(), function (res) {
-
+      graphStateAPI.getInRadius(loc, radius, function (res, asdf) {
         // update the node map
         var nNodesBefore = graphState.nodes.length;
         for (var i = 0; i < res.data.nodes.length; i++) {
@@ -31,7 +30,7 @@
         };
 
         // add local coordinate information to the new data
-        viewState.viewTransform.g2l_batch(graphState.nodes);
+        viewTransform.g2l_batch(graphState.nodes);
 
         console.log( 'fetched nodes' );
         if (callback != undefined && callback != null) {
@@ -40,8 +39,15 @@
       });
     };
 
-    graphState.add = function () {
+    // add a node
+    graphState.addNode = function (node, callback) {
 
+      graphStateAPI.newNode(node, function (res) {
+        // update the nodes array and nodeMap
+        graphState.nodes.push(res.data.node);
+        graphState.nodeMap[res.data.node._id] = graphState.nodes.length - 1;
+        callback(graphState.getNodeByID(res.data.node._id));
+      });
     };
 
     return graphState;

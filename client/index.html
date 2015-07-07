@@ -3,6 +3,7 @@
   <head>
     <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" />
     <link rel="stylesheet" type="text/css" href="client.css" />
+    <script type="text/javascript" src="underscore.js"></script>
     <script type="text/javascript" src="jquery.min.js"></script>
     <script type="text/javascript" src="angular.js"></script>
 
@@ -10,22 +11,31 @@
     <script type="text/javascript" src="graphState.js"></script>
     <script type="text/javascript" src="graphView.js"></script>
     <script type="text/javascript" src="graphDirectives.js"></script>
-    <script type="text/javascript" src="optionsPanel.js"></script>
     <script type="text/javascript" src="client.js"></script>
+    <script type="text/javascript" src="optionsPanel.js"></script>
   </head>
 
   <body>
-
-    <div id="headerDiv">
-       <h1 id="webbitTitle">Webbit</h1>
-    </div>
 
     <div id="appDiv" ng-controller="WebbitController as webbitCtrl"
     ng-mousemove="webbitCtrl.mousemove($event);"
     ng-mousedown="webbitCtrl.mousedown($event);"
     ng-mouseup="webbitCtrl.mouseup($event);">
 
+      <div id="headerDiv">
+         <h1 id="webbitTitle">Webbit</h1>
+      </div>
+
+      <!-- panel on RHS containing options like add node -->
       <options-panel></options-panel>
+
+      <!-- panel that pops up from the bottom for inputting the text when adding a node -->
+      <webbit-adding-text-panel ng-controller="AddingTextPanelController as textPanelCtrl"
+      ng-show="textPanelCtrl.uiState.acceptText;"></webbit-adding-text-panel>
+
+      <!-- used for a preview when adding a new node -->
+      <webbit-adding-node ng-show="webbitCtrl.uiState.addingNode"
+      ng-controller="NodeAddingController as nodeAddingCtrl"></webbit-adding-node>
 
       <!-- TODO: Mayb make close button or some shit -->
       <webbit-node-full ng-show="webbitCtrl.fullNode"
@@ -38,11 +48,12 @@
 
     </div>
 
-    <div id="footerDiv" >
+    <!-- footers are silly -->
+    <!-- <div id="footerDiv" > -->
 
       <!-- console div -->
-      <div id="console">yerr</div>
-    </div>
+      <!-- <div id="console">yerr</div> -->
+    <!-- </div> -->
 
   </body>
 </html>

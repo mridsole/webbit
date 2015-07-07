@@ -37,10 +37,13 @@ router.get('/nodes/around', function (req, res) {
 // create a new node
 router.post('/nodes/new', function (req, res) {
 
+  console.log(req.body);
   var node_req = req.body;
 
   // simple validation:
   var validState = nodeManager.utils.validateNode(node_req);
+
+  console.log(validState);
 
   if(!validState) {
     res.status(400);

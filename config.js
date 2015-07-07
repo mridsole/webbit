@@ -19,11 +19,11 @@ module.exports = {
   webbit: {
     minReplies: 1,
     maxReplies: 4,
-    minDistance: 60,
-    maxDistance: 300,
+    minDistance: 150,
+    maxDistance: 600,
     minWorld: -100000,
     maxWorld: 100000,
     defaultGetRadius: 2000,
-    maxGetRadius: 3000
+    maxGetRadius: 30000
   }
 };

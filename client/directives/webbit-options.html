@@ -1,7 +1,16 @@
+<link rel="stylesheet" href="options-panel.css" />
 <div
 id='webbitOptionsPanel'
 ng-controller='OptionsPanelController as optionsCtrl'
 ng-class='optionsCtrl.class'
 >
-
+  <h2 class='options-title'>Options</h2>
+  <div
+  ng-controller='AddNodeButtonController as addNodeCtrl'
+  ng-class='addNodeCtrl.class'
+  ng-mouseover='addNodeCtrl.mouseover($event);'
+  ng-mouseleave='addNodeCtrl.mouseleave($event);'
+  ng-click='addNodeCtrl.click($event);'>
+    Add Node
+  </div>
 </div>

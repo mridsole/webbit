@@ -1,0 +1,11 @@
+<div
+ng-class="nodeAddingCtrl.classBinding();"
+ng-style="nodeAddingCtrl.style_nodeCoords();"
+ng-mouseover="nodeAddingCtrl.mouseover($event);"
+ng-mouseleave="nodeAddingCtrl.mouseleave($event);"
+ng-click="nodeAddingCtrl.click($event);">
+{{nodeAddingCtrl.uiState.textEntered}}
+</div>
+
+<!-- draw all the edges for this node -->
+<webbit-adding-edge ng-repeat="node in nodeAddingCtrl.connect"></webbit-adding-edge>

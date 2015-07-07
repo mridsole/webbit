@@ -1,0 +1,72 @@
+.options-panel {
+  user-select: none;
+  z-index: 5;
+
+  position: absolute;
+  display:inline;
+  border-radius: 10px;
+  border: 2px solid white;
+  padding: 10px;
+  background-color: #222222;
+  opacity: 0.9;
+
+  right: 30px;
+  top: 40%;
+  width: 200px;
+  height: 400px;
+
+  transform: translate(0%, -50%);
+
+  overflow: hidden;
+
+  text-align: left;
+}
+
+.options-title {
+  text-align: center;
+  padding: 0px;
+  margin-top: 1em;
+  margin-bottom: 1em;
+}
+
+.options-button {
+  opacity: 1;
+  text-align: center;
+  user-select: none;
+  background-color: #222222;
+  position: absolute;
+  cursor: pointer;
+  display: inline;
+  border-radius: 10px;
+  border: 2px solid white;
+  width: 90%;
+  padding-top: 12px;
+  padding-bottom: 12px;
+
+  left: 50%;
+  transform: translate(-50%, 0%);
+}
+
+.options-button-hover {
+  opacity: 1;
+  text-align: center;
+  user-select: none;
+  background-color: #333333;
+  position: absolute;
+  cursor: pointer;
+  display: inline;
+  border-radius: 10px;
+  border: 2px solid white;
+  width: 90%;
+  padding-top: 12px;
+  padding-bottom: 12px;
+
+  left: 50%;
+  transform: translate(-50%, 0%);
+}
+
+div {
+  padding: 0px;
+  margin: 0px;
+  margin-top: 0px;
+}

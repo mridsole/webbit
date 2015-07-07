@@ -5,13 +5,17 @@
   app.controller('WebbitController', ['$scope', '$timeout', 'ViewTransform', 'ViewPan', 'viewState', 'graphState',
   function ($scope, $timeout, ViewTransform, ViewPan, viewState, graphState) {
 
+    // for reference in callbacks
+    var ctrl = this;
+
     // the mouse coordinates in local space - updated by this.mousemove
     this.mouse_loc = [0, 0];
 
+    // whether or not we're adding a node
+    this.uiState = viewState.uiState;
+
     // initialize the view transform object
     var appDiv = $('#appDiv');
-
-    var ctrl = this;
 
     // make view transform object
     var viewTransform = new ViewTransform( [0, 0],  appDiv.width(), appDiv.height(), appDiv.width(), appDiv.height() );
@@ -21,27 +25,11 @@
     viewState.init(viewTransform, viewPan);
 
     // get data
-    graphState.updateNodesInView( function (data) {
+    graphState.updateNodes(viewState.getLoc(), viewState.getViewRadius() + 2000, viewState.viewTransform, null);
 
-      // Expose data to the DOM template for display
-      ctrl.graphData = data;
+    // expose graph data to the template
+    this.graphData = graphState.nodes;
 
-    });
-
-    // graphState.getInRadius([0, 0], viewState.getViewRadius(), function (res) {
-    //
-    //   ctrl.graphData = res.data.nodes;
-    //   ctrl.graphMap = res.data.nodeMap;
-    //   $scope.graphData = ctrl.graphData;
-    //   $scope.graphMap = ctrl.graphMap;
-    //
-    //   // get data
-    //   viewPan.data = res.data.nodes;
-    //
-    //   // append local coords to the data
-    //   viewTransform.g2l_batch(ctrl.graphData);
-    // });
-    //
     var appDivPos = appDiv.position();
 
     // For recording the mouse position

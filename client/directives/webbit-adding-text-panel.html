@@ -1,0 +1,14 @@
+<link rel="stylesheet" href="text-add-panel.css" />
+<div
+ng-class='textPanelCtrl.class'>
+  <textarea
+  ng-model='textPanelCtrl.uiState.textEntered;'
+  class='text-add-panel-area'></textarea>
+  <br />
+  <div>
+  <button
+  ng-click='textPanelCtrl.confirm();'
+  ng-disabled='!textPanelCtrl.uiState.addingNode;'
+  class='text-add-panel-submit-button'>{{textPanelCtrl.confirmBtnText();}}</button>
+  </div>
+</div>
