@@ -94,6 +94,14 @@
       return this.class;
     };
 
+    this.x1 = function() {
+      return this.nodeOrigin.loc_local[0];
+    }
+
+    this.y1 = function() {
+      return this.nodeOrigin.loc_local[1];
+    }
+
     this.style_edge = function() {
 
       style = {
@@ -103,6 +111,7 @@
       };
 
       style.width = ViewTransform.dist(this.nodeOrigin.loc_local, this.nodeReplyTo.loc_local);
+
       style.transformOrigin = "0% 0%";
       style.transform = "rotate(" + ViewTransform.ang(this.nodeOrigin.loc_local, this.nodeReplyTo.loc_local) + "rad)";
 

@@ -1,7 +1,9 @@
-<div
-id="node-{{webbitNode._id}}-edgeto-{{nodeID}}"
-ng-controller="EdgeController as edgeCtrl"
-ng-class="edgeCtrl.classBinding();"
-ng-style="edgeCtrl.style_edge();"
->--------|
-</div>
+<svg>
+ <line id="node-{{webbitNode._id}}-edgeto-{{nodeID}}"
+ ng-controller="EdgeController as edgeCtrl"
+ ng-class="edgeCtrl.classBinding();"
+ style="stroke:rgb(255,255,255);stroke-width:2"
+ x1="0" y1="0" x2="200" y2="200"
+ >
+ </line>
+</svg>
