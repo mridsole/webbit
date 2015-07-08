@@ -19,8 +19,6 @@
     // whether or not this node has been selected as a reply in nodeAdd mode
     this.selected = false;
 
-    console.log('heyy');
-
     // for binding to the DOM with ng-class
     this.classBinding = function () {
 
@@ -39,12 +37,6 @@
 
     // return a style object detailing the local coords of the node
     this.style_nodeCoords = function () {
-
-      try {
-        this.node.loc_local[0];
-      } catch (err) {
-        console.log(this.node);
-      }
 
       return {
         left: this.node.loc_local[0],

@@ -24,6 +24,12 @@ module.exports = {
     minWorld: -100000,
     maxWorld: 100000,
     defaultGetRadius: 2000,
-    maxGetRadius: 30000
+    maxGetRadius: 30000,
+
+    // timeout ms in between sending a watch response and waiting for a new poll request
+    watchTimeout: 10000,
+    // timeout ms before a watch will simply send back an empty data array
+    // (this prevents automatic timeouts)
+    watchIdleTimeout: 60000
   }
 };

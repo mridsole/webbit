@@ -23,9 +23,13 @@
     var viewPan = new ViewPan(ctrl.mouse_loc, graphState.nodes, viewTransform);
     // initialize view state for sharing across modules
     viewState.init(viewTransform, viewPan);
-
-    // get data
-    graphState.updateNodes(viewState.getLoc(), viewState.getViewRadius() + 2000, viewState.viewTransform, null);
+    // initialize the graph state - once we get data, add some local coords to it
+    graphState.init(viewState.getLoc(), viewState.getViewRadius() + 20000, viewState.viewTransform, function (data, watch) {
+      console.log('data: ');
+      console.log(data);
+      console.log('watch: ');
+      console.log(watch);
+    });
 
     // expose graph data to the template
     this.graphData = graphState.nodes;

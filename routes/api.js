@@ -4,6 +4,7 @@
 var express = require('express');
 var path = require('path');
 var nodeManager = require('../nodes/nodeManager');
+var watchManager = require('../nodes/watchManager');
 
 var router = express.Router();
 
@@ -36,14 +37,10 @@ router.get('/nodes/around', function (req, res) {
 
 // create a new node
 router.post('/nodes/new', function (req, res) {
-
-  console.log(req.body);
   var node_req = req.body;
 
   // simple validation:
   var validState = nodeManager.utils.validateNode(node_req);
-
-  console.log(validState);
 
   if(!validState) {
     res.status(400);
@@ -57,26 +54,19 @@ router.post('/nodes/new', function (req, res) {
 
   // if it passes the simple validation, send it to node.add for the necessary processing
   nodeManager.add(node_req, req.db, addCallback);
+});
 
+router.post('/watches/new', function (req, res) {
 
+  var watchRes = watchManager.addWatch(req.body.watch);
+  // for (var watchID in watchManager.watches) {
+  //   console.log(watchID);
+  // }
+  res.send(watchRes);
+});
 
-  // TO DO:
-  // - more validation (posiition, max nodes, distance, etc)
-  // - add author ID
-  // uc.insert(node_req, function(err, doc) {
-  //
-  //   if(err != null) {
-  //     res.status(500);
-  //     res.send({ status: 500, message: err });
-  //     return;
-  //   }
-  //
-  //   var node_res = node_req;
-  //
-  //   res.status(201);
-  //   res.send({ status:201, message: 'new node created', response: node_res });
-  // });
-
+router.get('/watches/longpoll', function (req, res) {
+  watchManager.pollWatch(res, watchManager.watches[req.query._id]);
 });
 
 // add a new node

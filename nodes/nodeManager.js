@@ -5,6 +5,8 @@ var config = require('../config');
 // use underscore for _.findIndex
 var _ = require('underscore');
 
+var watchManager = require('./watchManager');
+
 module.exports = {
 
   // simple utility stuff
@@ -29,15 +31,15 @@ module.exports = {
         if(!nodeJSON.hasOwnProperty(field)) { return false; }
       }
 
-      // check the validity of the connect field - all entries must be numbers
+      // check the validity of the connect field - all entries must be strings
       for(var i = 0; i < nodeJSON.connect; i++) {
-        if(typeof(id) != typeof(1)) { return false; }
+        if(typeof(nodeJSON.connect[i]) != typeof('')) { return false; }
       }
 
       // check the validity of the loc field - should only be 2 number entries
       if (nodeJSON.loc.length != 2) { return false; }
       for (var i = 0; i < nodeJSON.loc; i++) {
-        if (typeof(nodeJSON.loc[i] != typeof(1))) { return false; };
+        if (typeof(nodeJSON.loc[i]) != typeof(1)) { return false; };
       }
 
       return true;
@@ -106,9 +108,11 @@ module.exports = {
 
       // if we haven't returned then all connections are in range - so make a new node
       nodes.insert( nodeJSON ).success( function (data) {
+        // after making the new node, notify the watch manager
+        watchManager.onNewNode(data);
         callback( { status: 201, message: 'node created', data: { node: data } } );
-        });
-        
+      });
+
     };
 
     nodes.find(
